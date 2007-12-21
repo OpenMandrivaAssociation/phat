@@ -14,6 +14,7 @@ License: 	GPL
 Group: 		System/Libraries
 Source: 	http://www.gazuga.net/phatfiles/%{name}-%{version}.tar.bz2
 Requires:	docbook-dtd30-sgml
+Buildroot: 	%_tmppath/%name-%version-buildroot
 BuildRequires:	gtk2-devel gtk-doc
 BuildRequires:  libgnomecanvas2-devel 
 
