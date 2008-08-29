@@ -1,21 +1,20 @@
-%define name 	phat
-%define version 0.3.1
-%define release %mkrel 3
-
-%define major 	0
-%define libname %mklibname %name %major
+%define major		0
+%define libname		%mklibname %{name} %{major}
+%define develname	%mklibname %{name} -d
 
 Summary: 	Widgets for audio applications
-Name: 		%name
-Version: 	%version
-Release: 	%release
-Url: 		http://www.gazuga.net/phat.php
-License: 	GPL
+Name: 		phat
+Version: 	0.3.1
+Release: 	%{mkrel 3}
+License: 	GPL+
 Group: 		System/Libraries
-Source: 	http://www.gazuga.net/phatfiles/%{name}-%{version}.tar.bz2
+# Upstream's dead, RIP...no source location
+Source0:	%{name}-%{version}.tar.bz2
+Patch0:		phat-0.3.1-configure.patch
 Requires:	docbook-dtd30-sgml
-Buildroot: 	%_tmppath/%name-%version-buildroot
-BuildRequires:	gtk2-devel gtk-doc
+Buildroot: 	%{_tmppath}/%{name}-%{version}-buildroot
+BuildRequires:	gtk2-devel
+BuildRequires:	gtk-doc
 BuildRequires:  libgnomecanvas2-devel 
 
 %description
@@ -33,49 +32,50 @@ PHAT is a collection of GTK+ widgets geared toward pro-audio apps. The goal
 is to eliminate duplication of effort and provide some standardization
 (well, at least for GTK+ apps).
 
-%package -n %{libname}-devel
-Summary: Headers for developing programs that will use %name
-Group: Development/C
-Requires: %{libname} = %{version}
-Provides: lib%{name}-devel = %{version}-%{release}
-Provides: %{name}-devel = %{version}-%{release}
+%package -n %{develname}
+Summary:	Headers for developing programs that will use %{name}
+Group:		Development/C
+Requires:	%{libname} = %{version}
+Provides:	%{name}-devel = %{version}-%{release}
+Obsoletes:	%{mklibname phat 0 -d}
 
-%description -n %{libname}-devel
+%description -n %{develname}
 This package contains the headers that programmers will need to develop
-applications which will use libraries from %name.
+applications which will use libraries from %{name}.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
+autoreconf
 %configure2_5x
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
+%post -n %{libname} -p /sbin/ldconfig
 %endif
 %if %mdkversion < 200900
-%postun -n %libname -p /sbin/ldconfig
+%postun -n %{libname} -p /sbin/ldconfig
 %endif
 
-%files -n %libname
+%files -n %{libname}
 %defattr(-,root,root)
-%_libdir/*.so.*
+%{_libdir}/*.so.%{major}*
 
-%files -n %libname-devel
+%files -n %{develname}
 %defattr(-,root,root)
-%_bindir/*
-%doc %_datadir/gtk-doc/html/%name
-%_libdir/*.so
-%_libdir/*.a
-%_libdir/*.la
-%_libdir/pkgconfig/*.pc
-%_includedir/%name
+%{_bindir}/*
+%{_libdir}/*.so
+%{_libdir}/*.a
+%{_libdir}/*.la
+%{_libdir}/pkgconfig/*.pc
+%{_includedir}/%{name}
 
