@@ -48,13 +48,13 @@ applications which will use libraries from %{name}.
 %patch0 -p1
 
 %build
-autoreconf
+autoreconf -fi
 %configure2_5x
 %make
 
 %install
 rm -rf %{buildroot}
-%makeinstall
+%makeinstall_std
 
 %clean
 rm -rf %{buildroot}
