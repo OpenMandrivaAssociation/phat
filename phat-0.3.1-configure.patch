@@ -1,0 +1,29 @@
+--- phat-0.3.1/configure.ac	2005-07-11 18:43:51.000000000 -0700
++++ phat-0.3.1/configure.ac.new	2008-08-28 19:08:41.000000000 -0700
+@@ -17,7 +17,6 @@
+     [if test x$enable_debug = xyes; then with_debug=yes ; fi])
+ 
+ if test x$with_debug = xno; then
+-    CFLAGS="-O3"
+     AC_DEFINE(DEBUG, 0, [[whether to display debugging output or not]])
+ else
+     AC_DEFINE(DEBUG, 1, [[whether to display debugging output or not]])
+@@ -80,8 +79,8 @@
+ PKG_CHECK_MODULES(MISC, libgnomecanvas-2.0)
+ 
+ # set compilation flags
+-CFLAGS="$CFLAGS $GTK_CFLAGS $MISC_CFLAGS -Wall -Werror"
+-LIBS="$LIBS $GTK_LIBS $MISC_LIBS"
++CFLAGS="$CFLAGS $GTK_CFLAGS $MISC_CFLAGS"
++LIBS="$LIBS $GTK_LIBS $MISC_LIBS -lX11"
+ 
+ # print build summary
+ AC_CONFIG_COMMANDS_POST([
+--- phat-0.3.1/Makefile.am	2004-09-29 16:42:36.000000000 -0700
++++ phat-0.3.1/Makefile.am.new	2008-08-28 19:17:22.000000000 -0700
+@@ -1,4 +1,4 @@
+-SUBDIRS = phat demos docs
++SUBDIRS = phat demos
+ 
+ EXTRA_DIST = bootstrap BUGS phat.pc.in phat.spec.in
+ 
