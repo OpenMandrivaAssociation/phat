@@ -14,7 +14,7 @@ Patch0:		phat-0.3.1-configure.patch
 Requires:	docbook-dtd30-sgml
 BuildRequires:	gtk2-devel
 BuildRequires:	gtk-doc
-BuildRequires:  libgnomecanvas2-devel 
+BuildRequires:  pkgconfig(libgnomecanvas-2.0) 
 
 %description
 PHAT is a collection of GTK+ widgets geared toward pro-audio apps. The goal
