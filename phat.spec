@@ -5,7 +5,7 @@
 Summary: 	Widgets for audio applications
 Name: 		phat
 Version: 	0.3.1
-Release: 	4
+Release: 	5
 License: 	GPL+
 Group: 		System/Libraries
 # Upstream's dead, RIP...no source location
