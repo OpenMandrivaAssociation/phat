@@ -5,14 +5,14 @@
 Summary: 	Widgets for audio applications
 Name: 		phat
 Version: 	0.3.1
-Release: 	5
+Release: 	6
 License: 	GPL+
 Group: 		System/Libraries
 # Upstream's dead, RIP...no source location
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		phat-0.3.1-configure.patch
 Requires:	docbook-dtd30-sgml
-BuildRequires:	gtk2-devel
+BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	gtk-doc
 BuildRequires:  pkgconfig(libgnomecanvas-2.0) 
 
