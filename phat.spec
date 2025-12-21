@@ -12,6 +12,11 @@ Group: 		System/Libraries
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		phat-0.3.1-configure.patch
 Requires:	docbook-dtd30-sgml
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	gtk-doc
 BuildRequires:  pkgconfig(libgnomecanvas-2.0) 
